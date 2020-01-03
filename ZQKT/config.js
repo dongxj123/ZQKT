@@ -1,5 +1,5 @@
-﻿stbId="123_sf";
-var reqUrl="http://218.108.172.135:8080/clearway/";
+﻿stbId="1111";
+var reqUrl="http://192.168.24.11:8082/zqkt/";
 //var reqUrl="http://21.254.220.15:8080/clearway/";
 // var localurl = "http://21.254.180.145:8080/ZSZCProject/"
 // //获取列表
@@ -13,7 +13,7 @@ var reqUrl="http://218.108.172.135:8080/clearway/";
 // //获取公告
 // var noticeurl="http://21.254.218.7:8080/hcms/api/stbContentController/indexnotice";
 // //http://218.108.175.19:8080/hcms/api/stbContentController/indexnotice?stbId=123_sf&regionCode=hs_sf
-
+var regionId="402809246e7d1ec6016e7d2000c60001";
 var sysp="8a0694216d4866c3016d59c7c9930c04";//首页主视频
 var homePageList="8a0694216d4866c3016d59c845ac0c06";//首页视频列表
 var fzzj="8a0694216d4866c3016d59c8d7e40c09";//法治浙江

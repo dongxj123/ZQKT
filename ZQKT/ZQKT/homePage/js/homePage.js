@@ -23,6 +23,7 @@ var videoSize = 0;
 // var newsPage=1;
 // var newsPageSize=0;
 var pos;
+var recommendData={};
 
 function init(){
 	// getList(homePageList,1,5);
@@ -38,6 +39,7 @@ function init(){
     setTimeout(function(){
         attachEvent();
     },300);
+    ajaxGetRecommend(stbId,regionId);
     //ajaxGetVideo();
 }
 
@@ -52,7 +54,7 @@ function ajaxGetVideo() {
             success:
                 function (resp) {
                     eval("menuJson = " + resp.responseText);
-                    json = menuJson.data;
+                    var json = menuJson.data;
                     videoId = json.results[0].id;
                     ajaxGetVideoList(videoId);
                 },
@@ -71,7 +73,7 @@ function ajaxGetVideoList(videoId) {
             success:
                 function (resp) {
                     eval("menuJson = " + resp.responseText);
-                    json = menuJson.data;
+                    var json = menuJson.data;
                     movies = json.contentInfo.split(",");
                     indexmovies = movies[0];
                     initMedia(338, 137, 603, 340);
@@ -82,26 +84,30 @@ function ajaxGetVideoList(videoId) {
                 }
         });
     }
-    function initNews() {
-        //var data = listJson.data.slice(0, 3);部分机顶盒可能不支持slice
-        var data = listJson.data;
-        for (var i = 0; i < 3; i++) {
-            $("news" + i).innerHTML = data[i].title;
+    function ajaxGetRecommend(_stdId,_regionId) {
+        $AJAX(
+            {
+                url: reqUrl + "api/stbContentController/posList?stbId=" + _stdId+"&regionId="+_regionId,
+                method: "get",
+                async: true,
+                success:
+                    function (resp) {
+                        eval("var menuJson = " + resp.responseText);
+                        var json = menuJson.data;
+                        initRecommend(json);
+                    },
+                failed:
+                    function (resp) {
+    
+                    }
+            });
         }
-        focMove(0);
-    }
-function showNews(){
-    var data = listJson.data;
-    for (var i = 0; i < 3; i++) {
-        $("news"+i).innerHTML=data[i].title;
-    }
-}
-//滚动word 文字信息 size 文字信息超过长度将滚动
-function roll(word, _size) {
-    if (word && (word.length > _size)) {
-        return '<marquee id="scroll" style="position:absolute;left:0px;" direction="left" scrollamonut="10" scrolldelay="100">' + word + '</marquee>';
-    } else {
-        return word;
+function initRecommend(_json){
+    var posiList=_json.posiList;
+    var hotlist=_json.hotlist;
+    for(var i=0;i<posiList.length;i++){
+        $("line50").innerHTML='<img id="pic0" src="'+reqUrl+'img/server/'+posiList[1].recommenPositionImg+'" width="292px" height="166px">';
+        $("line51").innerHTML='<img id="pic0" src="'+reqUrl+'img/server/'+posiList[2].recommenPositionImg+'" width="292px" height="166px">';
     }
 }
 //焦点移动

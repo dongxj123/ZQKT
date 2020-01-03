@@ -56,6 +56,7 @@ function ReadStbidNo() {
     try {
     	//var stbid="01001700522020A8BD3A22F792";
         var stbid = hardware.STB.serial;
+        //var stbid= wasuWeb.getStbId();//TVOS
         return stbid;
     }
     catch (e) { return null; }

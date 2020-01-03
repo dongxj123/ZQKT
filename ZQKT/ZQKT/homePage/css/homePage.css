@@ -3,7 +3,7 @@
 	position:absolute;
 	width: 1280px;
 	height: 720px;
-	background: url('../image/bg_img_02.jpg');
+	background: url('../image/bg_img_01.jpg');
 }
 
 #lineFoc{
@@ -154,3 +154,69 @@
 	background: url('../image/focus_05.png');
 }
 
+
+.line20{
+	position: absolute;
+	left: 1108px;
+    top: 53px;
+    width: 122px;
+    height: 50px;
+	background: url('../image/icon_01.png');
+}	
+.line30{
+	position: absolute;
+	left: 48px;
+    top: 150px;
+    width: 589px;
+	height: 337px;
+	background: royalblue;
+}
+.line40{
+	position: absolute;
+	left: 48px;
+    top: 494px;
+    width: 292px;
+    height: 166px;
+	background: royalblue;
+}
+.line41{
+	position: absolute;
+	left: 344px;
+    top: 494px;
+    width: 292px;
+    height: 166px;
+	background: royalblue;
+}
+
+.line50{
+	position: absolute;
+	left: 641px;
+    top: 151px;
+    width: 292px;
+    height: 166px;
+	background: royalblue;
+}
+.line51{
+	position: absolute;
+	left: 641px;
+    top: 322px;
+    width: 292px;
+    height: 166px;
+	background: royalblue;
+}
+.line52{
+	position: absolute;
+	left: 641px;
+    top: 494px;
+    width: 292px;
+    height: 166px;
+	background: royalblue;
+}
+.line60{
+	position: absolute;
+	left: 938px;
+    top: 151px;
+    width: 293px;
+    height: 509px;
+	background: royalblue;
+}
