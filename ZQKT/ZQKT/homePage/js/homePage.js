@@ -22,6 +22,7 @@ var videoPos = 0;
 var videoSize = 0;
 // var newsPage=1;
 // var newsPageSize=0;
+var navList=["402809246e7d1ec6016e7d2785c0000f","4028988b6f78fb86016f831ece010011","402809246e7d1ec6016e7d29155e001d","402809246e7d1ec6016e7d28e8de001b","4028988b6f83432a016f8348c9ce0008","4028988b6f83432a016f83495044000a","402809246e7d1ec6016e7d28c28a0019","402809246e7d1ec6016e7d2894e30017"];
 var pos;
 var recommendData={};
 
@@ -40,50 +41,10 @@ function init(){
         attachEvent();
     },300);
     ajaxGetRecommend(stbId,regionId);
-    //ajaxGetVideo();
 }
 
 
-		
-function ajaxGetVideo() {
-    $AJAX(
-        {
-            url: reqUrl + "api/stbapi/list/957e5c8f6dba171b016dc5107cec0009",
-            method: "get",
-            async: true,
-            success:
-                function (resp) {
-                    eval("menuJson = " + resp.responseText);
-                    var json = menuJson.data;
-                    videoId = json.results[0].id;
-                    ajaxGetVideoList(videoId);
-                },
-            failed:
-                function (resp) {
 
-                }
-        });
-}
-function ajaxGetVideoList(videoId) {
-    $AJAX(
-        {
-            url: reqUrl + "api/stbapi/detail/" + videoId,
-            method: "get",
-            async: true,
-            success:
-                function (resp) {
-                    eval("menuJson = " + resp.responseText);
-                    var json = menuJson.data;
-                    movies = json.contentInfo.split(",");
-                    indexmovies = movies[0];
-                    initMedia(338, 137, 603, 340);
-                },
-            failed:
-                function (resp) {
-
-                }
-        });
-    }
     function ajaxGetRecommend(_stdId,_regionId) {
         $AJAX(
             {
@@ -108,6 +69,10 @@ function initRecommend(_json){
     for(var i=0;i<posiList.length;i++){
         $("line50").innerHTML='<img id="pic0" src="'+reqUrl+'img/server/'+posiList[1].recommenPositionImg+'" width="292px" height="166px">';
         $("line51").innerHTML='<img id="pic0" src="'+reqUrl+'img/server/'+posiList[2].recommenPositionImg+'" width="292px" height="166px">';
+        $("line52").innerHTML='<img id="pic0" src="'+reqUrl+'img/server/'+posiList[3].recommenPositionImg+'" width="292px" height="166px">';
+        $("line40").innerHTML='<img id="pic0" src="'+reqUrl+'img/server/'+hotlist[0].recommenPositionImg+'" width="292px" height="166px">';
+        $("line41").innerHTML='<img id="pic0" src="'+reqUrl+'img/server/'+hotlist[1].recommenPositionImg+'" width="292px" height="166px">';
+        $("line60").innerHTML='<img id="pic0" src="'+reqUrl+'img/server/'+posiList[4].recommenPositionImg+'" width="293px" height="509px">';
     }
 }
 //焦点移动
@@ -164,36 +129,13 @@ function setHomeCookie(_area,_pos){
 // }
 function doselect(){
     if (area == 0) {
-        if (line0Pos == 0) {
-            //高速服务
-            SetCookie("expresswayServiceReturnUrl", location.href);
-            setHomeCookie(area,line0Pos);
-            window.location.href = "../serviceZoneList/serviceZoneList.html";
-        } else if (line0Pos == 1) {
-            //高速收费站信息
-            SetCookie("tollReturnUrl", location.href);
-            setHomeCookie(area,line0Pos);
-            window.location.href = "../toll/toll.html";
-        } else if (line0Pos == 2) {
-            //快讯列表页
-            SetCookie("kuaixunListReturnUrl", location.href);
-            setHomeCookie(area,line0Pos);
-            window.location.href = "../kuaixunList/kuaixunList.html";
-        } 
+        window.location.href = "../homePage/homePage.html";
     } else if (area == 1) {
-        window.location.href = "../vod/vodPlay.htm?rtspUrl=" + movies[countFlag];
+        SetCookie("categoryReturnUrl", location.href);
+        window.location.href = "../category/category.html?parentId=" + encodeURIComponent(navList[line1Pos])+"&line1Pos="+line1Pos;
     } else if (area == 2) {
-        if (line2Pos == 0) {
-            //高速路况
-            SetCookie("hweventListReturnUrl", location.href);
-            setHomeCookie(area,line2Pos);
-            window.location.href = "../hweventList/hweventList.html";
-        } else if (line2Pos == 1) {
-           //宣传专栏
-            SetCookie("publicityReturnUrl", location.href);
-            setHomeCookie(area,line2Pos);
-            window.location.href = "../publicity/publicity.html";
-        }
+        //订阅
+        
     } else if (area == 3) {
         SetCookie("detailReturnUrl", location.href);
         setHomeCookie(area,line3Pos);

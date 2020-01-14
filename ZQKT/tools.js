@@ -50,7 +50,24 @@ function SetCookie(key,value) {
     }
     catch (e) {}
 }*/
-
+//数据埋点
+function setPoint(_id,_stbid) {
+    $AJAX(
+        {
+            url: "http://21.254.218.7:8080/hcms/api/stbapi/buriedPointPvUv?stbid="+_stbid+"&code="+_id,
+            method: "get",             
+            async: true,               
+            success:                   
+                function (resp) {
+                    eval("pointJson = " + resp.responseText);
+                    
+                },
+            failed:                    
+                function (resp) {
+                    
+                }
+        });
+}
 //读取机顶盒号
 function ReadStbidNo() {
     try {

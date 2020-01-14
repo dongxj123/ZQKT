@@ -3,11 +3,28 @@
 	position:absolute;
 	width: 1280px;
 	height: 720px;
-	background: url('../image/bg_img_01.jpg');
+	background: url('../image/bg_img_01_3.jpg');
 }
-
+.line6{
+    position:absolute;
+    width: 292px;
+    height: 166px;
+}
 #lineFoc{
 	position:absolute;
+}
+#lineFoc1{
+	position:absolute;
+}
+.lineFoc3{
+    background: url('../image/focus_03.png');
+    width: 589px;
+    height: 337px;
+}
+.lineFocOther{
+    background: url('../image/focus_04.png');
+    width: 292px;
+    height: 166px;
 }
 .lineFoc00{
 	left: 220px;
@@ -129,7 +146,7 @@
 	border:0px;
 	background: url('../image/focus_04.png');
 }
-.lineFoc51{
+.lineFoc52{
 	left: 641px;
     top: 322px;
     width: 292px;
@@ -137,7 +154,7 @@
 	border:0px;
 	background: url('../image/focus_04.png');
 }
-.lineFoc52{
+.lineFoc54{
 	left: 641px;
     top: 494px;
     width: 292px;
@@ -145,13 +162,29 @@
 	border:0px;
 	background: url('../image/focus_04.png');
 }
-.lineFoc60{
+.lineFoc51{
 	left: 938px;
     top: 151px;
-    width: 293px;
-    height: 509px;
+    width: 292px;
+    height: 166px;
 	border:0px;
-	background: url('../image/focus_05.png');
+	background: url('../image/focus_04.png');
+}
+.lineFoc53{
+	left: 938px;
+    top: 322px;
+    width: 292px;
+    height: 166px;
+	border:0px;
+	background: url('../image/focus_04.png');
+}
+.lineFoc55{
+	left: 938px;
+    top: 494px;
+    width: 292px;
+    height: 166px;
+	border:0px;
+	background: url('../image/focus_04.png');
 }
 
 
@@ -166,7 +199,7 @@
 .line30{
 	position: absolute;
 	left: 48px;
-    top: 150px;
+    top: 151px;
     width: 589px;
 	height: 337px;
 	
@@ -196,7 +229,7 @@
     height: 166px;
 	
 }
-.line51{
+.line52{
 	position: absolute;
 	left: 641px;
     top: 322px;
@@ -204,7 +237,7 @@
     height: 166px;
 	
 }
-.line52{
+.line54{
 	position: absolute;
 	left: 641px;
     top: 494px;
@@ -212,11 +245,25 @@
     height: 166px;
 	
 }
-.line60{
-	position: absolute;
+
+.line51{
+    position: absolute;
 	left: 938px;
     top: 151px;
-    width: 293px;
-    height: 509px;
-	
+    width: 292px;
+    height: 166px;
+}
+.line53{
+    position: absolute;
+	left: 938px;
+    top: 322px;
+    width: 292px;
+    height: 166px;
+}
+.line55{
+    position: absolute;
+	left: 938px;
+    top: 494px;
+    width: 292px;
+    height: 166px;
 }
