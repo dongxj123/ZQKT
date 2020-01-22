@@ -24,7 +24,7 @@
 }
 .title{
     position: absolute;
-    width: 525px;
+    width: 549px;
     height: 101px;
     left: 80px;
     overflow: hidden;
@@ -38,10 +38,11 @@
 }
 .time{
     position: absolute;
-    width: 184px;
+    width: 149px;
     height: 101px;
-    left: 609px;
+    left: 644px;
     line-height: 101px;
+    overflow: hidden;
 }
 #pageLine {
     position: absolute;

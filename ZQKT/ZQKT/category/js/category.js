@@ -25,6 +25,7 @@ var videoPos = 0;
 var videoSize = 0;
 // var newsPage=1;
 // var newsPageSize=0;
+var orderStatus=0;//0未订购，1已订购
 var initInner;
 var leftArr=["48px","344px","641px","938px"];
 var pos;
@@ -44,6 +45,30 @@ function init(){
         attachEvent();
     },300);
     ajaxGetlistByRegionCode(parentId);
+    ajaxGetOrderStatus(stbId);
+}
+function ajaxGetOrderStatus(_stdId) {
+    $AJAX(
+    {
+        url: reqUrl + "api/netapi/query?stbId=" + _stdId,
+        method: "get",
+        async: true,
+        success:
+            function (resp) {
+                eval("var Json = " + resp.responseText);
+                //Json.code=200;
+                orderStatus=Json.code==200?1:0;
+                if(orderStatus==1){
+                    $("line20").style.display="block";
+                }else{
+                    line2Size=0;
+                }
+            },
+        failed:
+            function (resp) {
+
+            }
+    });
 }
     function ajaxGetlistByRegionCode(_parentId) {
         $AJAX(
@@ -183,7 +208,10 @@ function doselect(){
         //window.location.href = "../vod/vodPlay.htm?rtspUrl=" + movies[countFlag];
         //window.location.href = "../category/category.html?parentId=" + encodeURIComponent(navList[line1Pos]);
     } else if (area == 2) {
-        
+        //订阅
+        SetCookie("orderReturnUrl", location.href);
+        setHomeCookie(area,line2Pos);
+        window.location.href = "../order/order.html";
     } else if (area == 3) {
         SetCookie("detailReturnUrl", "../category/category.html?parentId="+parentId+"&area=3&pos="+line3Pos);
         window.location.href = "../detail/detail.html?catecoryId="+list[0].id;
@@ -391,8 +419,10 @@ function grabEvent() {
                 focMove(0);
         	}else if(area==1){
                 if(line1Pos==3 || line1Pos==7){
-                    area=2;
-                    focMove(0);
+                    if(line2Size>0){
+                        area=2;
+                        focMove(0);
+                    }
                 }else{
                     focMove(1);
                 }

@@ -8,18 +8,20 @@ var line2Size=1;
 var line2Pos=0;
 
 var line3Size=1;
-var line3Pos=0;
+var line2Pos=0;
 var line4Size=2;
 var line4Pos=0;
 var line5Size=3;
 var line5Pos=0;
 var line6Size=1;
 var line6Pos=0;
-
+var posiList=[];
+var hotlist=[];
 var videoId;
 var videoList = [];
 var videoPos = 0;
 var videoSize = 0;
+var orderStatus=0;//0未订购，1已订购
 // var newsPage=1;
 // var newsPageSize=0;
 var navList=["402809246e7d1ec6016e7d2785c0000f","4028988b6f78fb86016f831ece010011","402809246e7d1ec6016e7d29155e001d","402809246e7d1ec6016e7d28e8de001b","4028988b6f83432a016f8348c9ce0008","4028988b6f83432a016f83495044000a","402809246e7d1ec6016e7d28c28a0019","402809246e7d1ec6016e7d2894e30017"];
@@ -41,40 +43,52 @@ function init(){
         attachEvent();
     },300);
     ajaxGetRecommend(stbId,regionId);
+    ajaxGetOrderStatus(stbId);
+}
+function ajaxGetOrderStatus(_stdId) {
+    $AJAX(
+    {
+        url: reqUrl + "api/netapi/query?stbId=" + _stdId,
+        method: "get",
+        async: true,
+        success:
+            function (resp) {
+                eval("var Json = " + resp.responseText);
+                //Json.code=200;
+                orderStatus=Json.code==200?1:0;
+                if(orderStatus==1){
+                    $("line20").style.display="block";
+                }else{
+                    line2Size=0;
+                }
+            },
+        failed:
+            function (resp) {
+
+            }
+    });
 }
 
 
+function ajaxGetRecommend(_stdId,_regionId) {
+    $AJAX(
+    {
+        url: reqUrl + "api/stbContentController/posList?stbId=" + _stdId+"&regionId="+_regionId,
+        method: "get",
+        async: true,
+        success:
+            function (resp) {
+                eval("var menuJson = " + resp.responseText);
+                var json = menuJson.data;
+                initRecommend(json);
+            },
+        failed:
+            function (resp) {
 
-    function ajaxGetRecommend(_stdId,_regionId) {
-        $AJAX(
-            {
-                url: reqUrl + "api/stbContentController/posList?stbId=" + _stdId+"&regionId="+_regionId,
-                method: "get",
-                async: true,
-                success:
-                    function (resp) {
-                        eval("var menuJson = " + resp.responseText);
-                        var json = menuJson.data;
-                        initRecommend(json);
-                    },
-                failed:
-                    function (resp) {
-    
-                    }
-            });
-        }
-function initRecommend(_json){
-    var posiList=_json.posiList;
-    var hotlist=_json.hotlist;
-    for(var i=0;i<posiList.length;i++){
-        $("line50").innerHTML='<img id="pic0" src="'+reqUrl+'img/server/'+posiList[1].recommenPositionImg+'" width="292px" height="166px">';
-        $("line51").innerHTML='<img id="pic0" src="'+reqUrl+'img/server/'+posiList[2].recommenPositionImg+'" width="292px" height="166px">';
-        $("line52").innerHTML='<img id="pic0" src="'+reqUrl+'img/server/'+posiList[3].recommenPositionImg+'" width="292px" height="166px">';
-        $("line40").innerHTML='<img id="pic0" src="'+reqUrl+'img/server/'+hotlist[0].recommenPositionImg+'" width="292px" height="166px">';
-        $("line41").innerHTML='<img id="pic0" src="'+reqUrl+'img/server/'+hotlist[1].recommenPositionImg+'" width="292px" height="166px">';
-        $("line60").innerHTML='<img id="pic0" src="'+reqUrl+'img/server/'+posiList[4].recommenPositionImg+'" width="293px" height="509px">';
-    }
+            }
+    });
 }
+
 //焦点移动
 function focMove(_num){
     if(area==0){
@@ -96,9 +110,9 @@ function focMove(_num){
 		}
 	}
 	if(area==3){
-		if(line3Pos + _num < line3Size && line3Pos + _num >=0){
-            line3Pos+=_num;
-            $("lineFoc").className="lineFoc"+area+line3Pos;
+		if(line2Pos + _num < line3Size && line2Pos + _num >=0){
+            line2Pos+=_num;
+            $("lineFoc").className="lineFoc"+area+line2Pos;
 		}
 	}
 	if(area==4){
@@ -127,6 +141,25 @@ function setHomeCookie(_area,_pos){
 // function callBack(){
 // 	window.location.href = "../vod/vodPlay.htm?rtspUrl=" + detailJson.data.contentInfo;
 // }
+function initRecommend(_json){
+    posiList=_json.posiList;
+    hotlist=_json.hotlist;
+    if(posiList[0].categoryType==0){
+        //推荐页1
+        $("line30").innerHTML='<img id="pic0" src="'+reqUrl+'img/server/'+posiList[0].recommenPositionImg+'" width="589px" height="337px">';
+    }else{
+        //小窗口视频播放
+        movies = [posiList[0].description];
+        indexmovies = movies[0];
+        initMedia(338, 137, 603, 340);
+    }
+    $("line50").innerHTML='<img id="pic0" src="'+reqUrl+'img/server/'+posiList[1].recommenPositionImg+'" width="292px" height="166px">';
+    $("line51").innerHTML='<img id="pic0" src="'+reqUrl+'img/server/'+posiList[2].recommenPositionImg+'" width="292px" height="166px">';
+    $("line52").innerHTML='<img id="pic0" src="'+reqUrl+'img/server/'+posiList[3].recommenPositionImg+'" width="292px" height="166px">';
+    $("line40").innerHTML='<img id="pic0" src="'+reqUrl+'img/server/'+hotlist[0].recommenPositionImg+'" width="292px" height="166px">';
+    $("line41").innerHTML='<img id="pic0" src="'+reqUrl+'img/server/'+hotlist[1].recommenPositionImg+'" width="292px" height="166px">';
+    $("line60").innerHTML='<img id="pic0" src="'+reqUrl+'img/server/'+posiList[4].recommenPositionImg+'" width="293px" height="509px">';
+}
 function doselect(){
     if (area == 0) {
         window.location.href = "../homePage/homePage.html";
@@ -135,15 +168,32 @@ function doselect(){
         window.location.href = "../category/category.html?parentId=" + encodeURIComponent(navList[line1Pos])+"&line1Pos="+line1Pos;
     } else if (area == 2) {
         //订阅
-        
+        SetCookie("orderReturnUrl", location.href);
+        setHomeCookie(area,line2Pos);
+        window.location.href = "../order/order.html";
     } else if (area == 3) {
         SetCookie("detailReturnUrl", location.href);
-        setHomeCookie(area,line3Pos);
-        window.location.href = "../detail/detail.html?apiUrl=api/trafficapi/queryTrafficInformation&dataIndex=" + line3Pos + "&contentField=informationContent&titleField=title";
+        setHomeCookie(area,line2Pos);
+        if(posiList[0].categoryType==0){
+            //推荐页1
+            window.location.href = "../detail/detail.html?catecoryId="+posiList[0].id;
+        }else{
+            //视频全屏播放
+            window.location.href = "../vod/vodPlay.htm?rtspUrl=" + posiList[0].description;
+        }
+        
     } else if (area == 4) {
-        SetCookie("trafficReturnUrl", location.href);
+        SetCookie("detailReturnUrl", location.href);
         setHomeCookie(area,line4Pos);
-        window.location.href = "../traffic/traffic.html";
+        window.location.href = "../detail/detail.html?catecoryId="+posiList[line4Pos].id;
+    } else if (area == 5) {
+        SetCookie("detailReturnUrl", location.href);
+        setHomeCookie(area,line5Pos);
+        window.location.href = "../detail/detail.html?catecoryId="+posiList[line5Pos+1].id;
+    } else if (area == 6) {
+        SetCookie("detailReturnUrl", location.href);
+        setHomeCookie(area,line6Pos);
+        window.location.href = "../detail/detail.html?catecoryId="+posiList[4].id;
     } 
 }
 
@@ -281,8 +331,10 @@ function grabEvent() {
                 focMove(0);
         	}else if(area==1){
                 if(line1Pos==3 || line1Pos==7){
-                    area=2;
-                    focMove(0);
+                    if(line2Size>0){
+                        area=2;
+                        focMove(0);
+                    }
                 }else{
                     focMove(1);
                 }
