@@ -56,7 +56,7 @@ function ajaxGetOrderStatus(_stdId) {
                 eval("var Json = " + resp.responseText);
                 //Json.code=200;
                 orderStatus=Json.code==200?1:0;
-                if(orderStatus==1){
+                if(orderStatus==0){
                     $("line20").style.display="block";
                 }else{
                     line2Size=0;

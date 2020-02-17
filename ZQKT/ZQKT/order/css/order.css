@@ -11,47 +11,158 @@
     position: absolute;
     top: 223px;
     left: 262px;
+    overflow: hidden;
 }
 #line11{
     position: absolute;
     top: 225px;
     left: 528px;
+    overflow: hidden;
 }
 #line12{
     position: absolute;
     top: 225px;
     left: 791px;
+    overflow: hidden;
 }
 .line10{
     width: 224px;
-    height: 198px;
+    height: 235px;
     background: url('../image/line10.png');
 }
 
 .line11{
     width: 224px;
-    height: 198px;
+    height: 235px;
     background: url('../image/line11.png');
 }
 .line12{
     width: 224px;
-    height: 198px;
+    height: 235px;
     background: url('../image/line12.png');
 }
 
 .line10Foc{
-    width: 254px;
-    height: 438px;
+    width: 224px;
+    height: 408px;
     background: url('../image/line10Foc.png');
 }
 
 .line11Foc{
-    width: 254px;
-    height: 438px;
+    width: 224px;
+    height: 408px;
     background: url('../image/line11Foc.png');
 }
 .line12Foc{
-    width: 254px;
-    height: 438px;
+    width: 224px;
+    height: 408px;
     background: url('../image/line12Foc.png');
+}
+.title{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 224px;
+    height: 66px;
+    line-height: 66px;
+    overflow: hidden;
+    text-align: center;
+    color: white;
+    font-size: 30px;
+}
+.price{
+    position: absolute;
+    top: 110px;
+    left: 0px;
+    width: 224px;
+    height: 66px;
+    color: #666666;
+}
+.priceFoc{
+    position: absolute;
+    top: 110px;
+    left: 0px;
+    width: 224px;
+    height: 66px;
+    color: #000000;
+}
+.sym{
+    position: absolute;
+    top: 0px;
+    left: 33px;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    font-size: 28px;
+}
+.sum{
+    position: absolute;
+    top: 0px;
+    left: 63px;
+    width: 155px;
+    height: 66px;
+    line-height: 66px;
+    font-size: 60px;
+}
+.unit{
+    
+    font-size: 30px;
+}
+.oldPrice{
+    position: absolute;
+    top: 172px;
+    left: 50px;
+    width: 91px;
+    height: 22px;
+    line-height: 22px;
+    font-size: 22px;
+    color: #666666;
+    background: url("../image/oldPrice.png");
+}
+.oldPriceFoc{
+    position: absolute;
+    top: 172px;
+    left: 50px;
+    width: 91px;
+    height: 22px;
+    line-height: 22px;
+    font-size: 22px;
+    color: #000000;
+    background: url("../image/oldPriceFoc.png");
+}
+#QRCode{
+    position: absolute;
+    top: 200px;
+    left: 43px;
+    width: 138px;
+    height: 138px;
+}
+.tip{
+    position: absolute;
+    top: 340px;
+    left: 50px;
+    width: 155px;
+    height: 14px;
+    line-height: 14px;
+    font-size: 14px;
+    color: #999999;
+}
+.Arrearage{
+    position: absolute;
+    top: 360px;
+    left: 50px;
+    width: 155px;
+    height: 36px;
+    line-height: 18px;
+    font-size: 18px;
+    color: #666666;
+}
+.arrMoney0{
+    color: #fa9a35;
+}
+.arrMoney1{
+    color: #10c55b;
+}
+.arrMoney2{
+    color: #4ea1f8;
 }

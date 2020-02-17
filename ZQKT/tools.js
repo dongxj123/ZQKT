@@ -76,7 +76,7 @@ function ReadStbidNo() {
         //var stbid= wasuWeb.getStbId();//TVOS
         return stbid;
     }
-    catch (e) { return null; }
+    catch (e) { return "010002136327B0CCE8AC10831B"; }
 }
 
 //读取智能卡号
@@ -112,8 +112,15 @@ function $AJAX(request) {
     var async = true;
     if (request.async != undefined)
         async = request.async;
+    
     req.open(method, url, async); //与服务端建立连接(请求方式post或get，地址,true表示异步)
-    req.send(); //发送请求
+    if(request.method=="POST"){
+        req.setRequestHeader("Content-Type", "application/json;charset=utf-8");
+        req.send(request.param); //发送请求
+    }else{
+        req.send();
+    }
+    
 }
 //存储cookies
 function SetCookie(name,value)
@@ -149,3 +156,87 @@ function getWordSize(__num) {
         return __num;
     }
 }
+
+(function (NS) {
+    var simpleTypes = ["number", "boolean", "undefined", "string", "function"]
+    function stringify(object) {
+        var type = typeof object
+        if (indexOf(simpleTypes, type) > -1) {
+            return parseSimpleObject(object);
+        }
+        if (object instanceof Array) {
+            var len = object.length;
+            var resArr = [];
+            for (var i = 0; i < len; i++) {
+                var itemType = typeof object[i];
+                if (indexOf(simpleTypes, itemType) > -1) {
+                    if (itemType != "undefined") {
+                        resArr.push(parseSimpleObject(object[i]));
+                    }
+                    else {
+                        resArr.push('null')
+                    }
+                }
+                else {
+                    resArr.push(stringify(object[i]))
+                }
+            }
+            return "[" + resArr.join(",") + "]"
+        }
+        if (object instanceof Object) {
+            if (object == null) {
+                return "null"
+            }
+            var resArr = []
+            for (var name in object) {
+                var itemType = typeof object[name];
+                if (indexOf(simpleTypes, itemType) > -1) {
+                    if (itemType != 'undefined') {
+                        resArr.push("\"" + name + "\":" + parseSimpleObject(object[name]))
+                    }
+                }
+                else {
+                    resArr.push("\"" + name + "\":" + stringify(object[name]))
+                }
+            }
+            return "{" + resArr.join(",") + "}"
+        }
+    }
+    function parseSimpleObject(object) {
+        var type = typeof object;
+        if (type == "string" || type == "function") {
+            return "\"" + object.toString().replace(/"/g, "\\\"") + "\""
+        }
+        if (type == "number" || type == "boolean") {
+            return object.toString()
+        }
+        if (type == "undefined") {
+            return "undefined"
+        }
+        return "\"" + object.toString().replace("\"", "\\\"") + "\""
+    }
+    function indexOf(arr, val) {
+        for (var i = 0; i < arr.length; i++) {
+            if (arr[i] === val) {
+                return i;
+            }
+        }
+        return -1
+    }
+    NS.stringify = function (object, isEncodeZh) {
+        var res = stringify(object)
+        if (isEncodeZh) {
+            var encodeRes = "";
+            for (var i = 0; i < res.length; i++) {
+                if (res.charCodeAt(i) < Oxff) {
+                    encodeRes += res[i]
+                }
+                else {
+                    encodeRes += "\\u" + res.charCodeAt(i).toString(16);
+                }
+            }
+            res = encodeRes
+        }
+        return res;
+    }
+})(window);
