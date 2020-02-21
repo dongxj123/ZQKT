@@ -144,14 +144,14 @@ function setHomeCookie(_area,_pos){
 function initRecommend(_json){
     posiList=_json.posiList;
     hotlist=_json.hotlist;
-    if(posiList[0].categoryType==0){
-        //推荐页1
-        $("line30").innerHTML='<img id="pic0" src="'+reqUrl+'img/server/'+posiList[0].recommenPositionImg+'" width="589px" height="337px">';
-    }else{
+    if(posiList[0].categoryType==2){//2视频、1图片、0其他
         //小窗口视频播放
         movies = [posiList[0].description];
         indexmovies = movies[0];
         initMedia(338, 137, 603, 340);
+    }else{
+         //推荐页1
+         $("line30").innerHTML='<img id="pic0" src="'+reqUrl+'img/server/'+posiList[0].recommenPositionImg+'" width="589px" height="337px">';
     }
     $("line50").innerHTML='<img id="pic0" src="'+reqUrl+'img/server/'+posiList[1].recommenPositionImg+'" width="292px" height="166px">';
     $("line51").innerHTML='<img id="pic0" src="'+reqUrl+'img/server/'+posiList[2].recommenPositionImg+'" width="292px" height="166px">';
@@ -174,12 +174,12 @@ function doselect(){
     } else if (area == 3) {
         SetCookie("detailReturnUrl", location.href);
         setHomeCookie(area,line2Pos);
-        if(posiList[0].categoryType==0){
-            //推荐页1
-            window.location.href = "../detail/detail.html?catecoryId="+posiList[0].id;
-        }else{
+        if(posiList[0].categoryType==2){
             //视频全屏播放
             window.location.href = "../vod/vodPlay.htm?rtspUrl=" + posiList[0].description;
+        }else{
+             //推荐页1
+             window.location.href = "../detail/detail.html?catecoryId="+posiList[0].id;
         }
         
     } else if (area == 4) {

@@ -32,6 +32,9 @@ function ajaxGetOrderStatus(_stdId) {
                 // }
                 if(Json.code==200){
                     clearInterval(checkOrderInterval);
+                    delCookie("needmoney");
+                    delCookie("custname");
+                    delCookie("custid");
                     if(getCookie("orderReturnUrl")){
                         window.location.href = getCookie("orderReturnUrl");
                     }
@@ -169,7 +172,7 @@ function focMove(_num){
             $("line1"+line1Pos).className="line"+area+line1Pos+"Foc";
             var focStr="";
             focStr+='<div class="title">'+list[line1Pos].title+'</div>'
-            focStr+='<div class="priceFoc"><div class="sym">￥</div><div class="sum">'+list[line1Pos].price+'<span class="unit">'+list[i].unit+'</span></div></div>'
+            focStr+='<div class="priceFoc"><div class="sym">￥</div><div class="sum">'+list[line1Pos].price+'<span class="unit">'+list[line1Pos].unit+'</span></div></div>'
             focStr+='<div id="oldPrice" class="oldPriceFoc">￥'+list[line1Pos].origPrice+'元</div>'
             focStr+='<img id="QRCode" src="data:image/png;base64,'+QRCodeList[line1Pos]+'"/>'
             focStr+='<div class="tip">使用支付宝扫码支付</div>'
@@ -227,11 +230,11 @@ function attachEvent() {
 
 function grabEvent() {
     var key_code = event.which != undefined ? event.which : event.keyCode;
-    try{
-        iPanel.debug("keycode=="+keycode);
-    }catch(e){
-        console.log(e);
-    }
+    // try{
+    //     iPanel.debug("keycode=="+keycode);
+    // }catch(e){
+    //     console.log(e);
+    // }
     switch (key_code) {
         case 1: //up
         case 38:
