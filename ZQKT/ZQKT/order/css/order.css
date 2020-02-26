@@ -5,6 +5,22 @@
 	height: 720px;
 	background: url('../image/bg_img.jpg');
 }
+#successbg{
+	position:absolute;
+	width: 1280px;
+	height: 720px;
+    background: url('../image/success.png');
+    z-index: 1;
+}
+
+#errorbg{
+	position:absolute;
+	width: 1280px;
+	height: 720px;
+    background: url('../image/error.png');
+    z-index: 1;
+}
+
 
 
 #line10{

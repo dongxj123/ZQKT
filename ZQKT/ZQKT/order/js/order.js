@@ -6,43 +6,47 @@ var line1Size=3;
 var line1Pos=0;
 var needmoney=0;
 var custname="";
-var custname="";
+var custid="";
 var list;
 var QRCodeList=[];
 var checkOrderInterval;
-var a=3;
 function init(){
     ajaxGetPriceList();
-    checkOrderInterval = setInterval(function() {
-        ajaxGetOrderStatus(stbId);
-    },3000)
+    
 }
-function ajaxGetOrderStatus(_stdId) {
+function ajaxGetQueryStatus(_stdId) {
     $AJAX(
     {
-        url: reqUrl + "api/netapi/query?stbId=" + _stdId,
+        url: reqUrl + "api/netapi/query/status?stbId=" + _stdId,
         method: "get",
         async: true,
         success:
             function (resp) {
                 eval("var Json = " + resp.responseText);
-                //Json.code=200;
                 // if(Json.code==200){
                 //     clearInterval(checkOrderInterval);
                 // }
-                if(Json.code==200){
+                if(Json.code==0){
                     clearInterval(checkOrderInterval);
                     delCookie("needmoney");
                     delCookie("custname");
                     delCookie("custid");
-                    if(getCookie("orderReturnUrl")){
-                        window.location.href = getCookie("orderReturnUrl");
-                    }
-                    else{
-                        window.location.href="../homePage/homePage.html";
-                    }
-                }else{
+                    $("successbg").style.display="block";
+                    setTimeout(function(){
+                        if(getCookie("orderReturnUrl")){
+                            window.location.href = getCookie("orderReturnUrl");
+                        }
+                        else{
+                            window.location.href="../homePage/homePage.html";
+                        }
+                    },3000);
                     
+                }else if(Json.code==412){
+                    //继续轮训
+                }else{
+                    //订购失败
+                    $("errorbg").style.display="block";
+                    area=2;
                 }
                 
             },
@@ -63,7 +67,7 @@ function ajaxGetPriceList() {
                     eval("var menuJson = " + resp.responseText);
                     list = menuJson.data;
                     if(getCookie("needmoney") && getCookie("custname") && getCookie("custid")){
-                        needmoney=getCookie("needmoney");
+                        needmoney=Math.abs(Number(getCookie("needmoney")));
                         custname=getCookie("custname");
                         custid=getCookie("custid");
                         getQRCodes();
@@ -93,7 +97,10 @@ function ajaxGetQRCode(_param,_callBack,index) {
                 setTimeout(function(){
                     attachEvent();
                 },300);
-
+                //第一个二维码加载出来之后开始轮询订购状态
+                checkOrderInterval = setInterval(function() {
+                    ajaxGetQueryStatus(stbId);
+                },3000)
             }
        }
     };
@@ -118,7 +125,7 @@ function ajaxGetCust(_stbId) {
                 function (resp) {
                     eval("var menuJson = " + resp.responseText);
                     var json = eval("("+menuJson.data+")");
-                    needmoney=json.output.needmoney;
+                    needmoney=Math.abs(Number(json.output.needmoney));
                     custname=json.output.custname;
                     custid=json.output.custid;
                     SetCookie("needmoney",needmoney);
@@ -150,6 +157,10 @@ function getQRCodes(){
             "stbId": stbId,
             "totalFee": list[i].price
         };
+        if(needmoney>0){
+            param.totalFee=list[i].price+needmoney;
+        }
+        
         ajaxGetQRCode(param,"callBack"+i,i);
     }
 }
@@ -176,7 +187,7 @@ function focMove(_num){
             focStr+='<div id="oldPrice" class="oldPriceFoc">￥'+list[line1Pos].origPrice+'元</div>'
             focStr+='<img id="QRCode" src="data:image/png;base64,'+QRCodeList[line1Pos]+'"/>'
             focStr+='<div class="tip">使用支付宝扫码支付</div>'
-            if(needmoney<0){
+            if(needmoney>0){
                 focStr+='<div class="Arrearage">账户余额：<span class="arrMoney'+line1Pos+'">-￥'+needmoney+'</span><br/>资费已包含欠费</div>';
             }
             $("line1"+line1Pos).innerHTML=focStr;
@@ -196,7 +207,15 @@ function doselect(){
         
     } else if (area == 1) {
         //window.location.href = "../vod/vodPlay.htm?rtspUrl=" + movies[countFlag];
-    } 
+    } else if (area == 2) {
+        //订购失败时，按确定
+        if(getCookie("orderReturnUrl")){
+            window.location.href = getCookie("orderReturnUrl");
+        }
+        else{
+            window.location.href="../homePage/homePage.html";
+        }
+    }
 }
 
 // //vod视频播放
