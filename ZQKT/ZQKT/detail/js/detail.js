@@ -30,8 +30,7 @@ function init(){
     setTimeout(function(){
         attachEvent();
     },300);
-    ajaxGetContentlist(id);
-    ajaxGetCategoryDetail(id);
+    
     ajaxGetOrderStatus(stbId);
 }
 function ajaxGetOrderStatus(_stdId) {
@@ -45,6 +44,8 @@ function ajaxGetOrderStatus(_stdId) {
                 eval("var Json = " + resp.responseText);
                 //Json.code=200;
                 orderStatus=Json.code==200?1:0;
+                ajaxGetContentlist(id);
+                ajaxGetCategoryDetail(id);
             },
         failed:
             function (resp) {
