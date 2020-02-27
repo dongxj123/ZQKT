@@ -23,7 +23,7 @@ function init(){
     delCookie("detailPage");
     delCookie("detailPos");
     eval("line"+area+"Pos="+pos);
-	
+	setPoint(id,stbId);
 	//$("lineFoc").className="lineFoc13";
     //startVideo(0);
     //focMove(0);

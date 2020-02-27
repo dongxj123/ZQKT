@@ -71,6 +71,7 @@ function ajaxGetOrderStatus(_stdId) {
     });
 }
     function ajaxGetlistByRegionCode(_parentId) {
+        setPoint(_parentId,stbId);
         $AJAX(
             {
                 url: reqUrl + "api/stbCategoryController/listByRegionCode?parentId="+_parentId+"&regionCode=zqkt",

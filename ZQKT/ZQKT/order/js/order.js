@@ -11,6 +11,7 @@ var list;
 var QRCodeList=[];
 var checkOrderInterval;
 function init(){
+    setPoint("ATUY9C5R",stbId);
     ajaxGetPriceList();
     
 }

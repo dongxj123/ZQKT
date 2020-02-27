@@ -29,6 +29,7 @@ var pos;
 var recommendData={};
 
 function init(){
+    setPoint("JFFOOJ5W",stbId);
 	// getList(homePageList,1,5);
 	area = getCookie("homeArea") ? Number(getCookie("homeArea")) : 0;
     pos = getCookie("homePos") ? Number(getCookie("homePos")) : 0;

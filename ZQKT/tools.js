@@ -54,7 +54,7 @@ function SetCookie(key,value) {
 function setPoint(_id,_stbid) {
     $AJAX(
         {
-            url: "http://21.254.218.7:8080/hcms/api/stbapi/buriedPointPvUv?stbid="+_stbid+"&code="+_id,
+            url: "http://21.254.218.116:8080/zqkt/api/stbapi/buriedPointPvUv?stbid="+_stbid+"&code="+_id,
             method: "get",             
             async: true,               
             success:                   
@@ -71,7 +71,9 @@ function setPoint(_id,_stbid) {
 //读取机顶盒号
 function ReadStbidNo() {
     try {
-    	//var stbid="01001700522020A8BD3A22F792";
+        //var stbid="01001700522020A8BD3A22F792";
+        //11040010100052544c1a0099
+        //010002136327B0CCE8AC10831B
         var stbid = hardware.STB.serial;
         //var stbid= wasuWeb.getStbId();//TVOS
         return stbid;
