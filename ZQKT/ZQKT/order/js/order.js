@@ -8,6 +8,7 @@ var needmoney=0;
 var custname="";
 var custid="";
 var list;
+var orderNum="ZQKT"+new Date().getTime()+Math.ceil(Math.random()*10000000);
 var QRCodeList=[];
 var checkOrderInterval;
 function init(){
@@ -15,10 +16,10 @@ function init(){
     ajaxGetPriceList();
     
 }
-function ajaxGetQueryStatus(_stdId) {
+function ajaxGetQueryStatus() {
     $AJAX(
     {
-        url: reqUrl + "api/netapi/query/status?stbId=" + _stdId,
+        url: reqUrl + "api/netapi/query/status?orderNo=" + orderNum,
         method: "get",
         async: true,
         success:
@@ -46,6 +47,7 @@ function ajaxGetQueryStatus(_stdId) {
                     //继续轮训
                 }else{
                     //订购失败
+                    clearInterval(checkOrderInterval);
                     $("errorbg").style.display="block";
                     area=2;
                 }
@@ -100,7 +102,7 @@ function ajaxGetQRCode(_param,_callBack,index) {
                 },300);
                 //第一个二维码加载出来之后开始轮询订购状态
                 checkOrderInterval = setInterval(function() {
-                    ajaxGetQueryStatus(stbId);
+                    ajaxGetQueryStatus();
                 },3000)
             }
        }
@@ -150,6 +152,7 @@ function getQRCodes(){
             "custName": custname,
             "orderType": "01",
             "packageId": list[i].packageId,
+            "orderNo":orderNum,
             "productList": [{
                 "productName":list[i].title,
                 "fee":list[i].price
