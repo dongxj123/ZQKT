@@ -29,6 +29,7 @@ var pos;
 var recommendData={};
 
 function init(){
+	//alert(stbId);
     setPoint("JFFOOJ5W",stbId);
 	// getList(homePageList,1,5);
 	area = getCookie("homeArea") ? Number(getCookie("homeArea")) : 0;
@@ -90,6 +91,11 @@ function ajaxGetRecommend(_stdId,_regionId) {
     });
 }
 
+
+
+
+
+
 //焦点移动
 function focMove(_num){
     if(area==0){
@@ -149,7 +155,7 @@ function initRecommend(_json){
         //小窗口视频播放
         movies = [posiList[0].description];
         indexmovies = movies[0];
-        initMedia(338, 137, 603, 340);
+        initMedia(49, 152, 587, 335);
     }else{
          //推荐页1
          $("line30").innerHTML='<img id="pic0" src="'+reqUrl+'img/server/'+posiList[0].recommenPositionImg+'" width="589px" height="337px">';
@@ -157,8 +163,8 @@ function initRecommend(_json){
     $("line50").innerHTML='<img id="pic0" src="'+reqUrl+'img/server/'+posiList[1].recommenPositionImg+'" width="292px" height="166px">';
     $("line51").innerHTML='<img id="pic0" src="'+reqUrl+'img/server/'+posiList[2].recommenPositionImg+'" width="292px" height="166px">';
     $("line52").innerHTML='<img id="pic0" src="'+reqUrl+'img/server/'+posiList[3].recommenPositionImg+'" width="292px" height="166px">';
-    $("line40").innerHTML='<img id="pic0" src="'+reqUrl+'img/server/'+hotlist[0].recommenPositionImg+'" width="292px" height="166px">';
-    $("line41").innerHTML='<img id="pic0" src="'+reqUrl+'img/server/'+hotlist[1].recommenPositionImg+'" width="292px" height="166px">';
+    $("line40").innerHTML='<img id="pic0" src="'+reqUrl+'img/server/'+hotlist[0].categoryImg+'" width="292px" height="166px">';
+    $("line41").innerHTML='<img id="pic0" src="'+reqUrl+'img/server/'+hotlist[1].categoryImg+'" width="292px" height="166px">';
     $("line60").innerHTML='<img id="pic0" src="'+reqUrl+'img/server/'+posiList[4].recommenPositionImg+'" width="293px" height="509px">';
 }
 function doselect(){
@@ -186,7 +192,7 @@ function doselect(){
     } else if (area == 4) {
         SetCookie("detailReturnUrl", location.href);
         setHomeCookie(area,line4Pos);
-        window.location.href = "../detail/detail.html?catecoryId="+posiList[line4Pos].id;
+        window.location.href = "../detail/detail.html?catecoryId="+hotlist[line4Pos].id;
     } else if (area == 5) {
         SetCookie("detailReturnUrl", location.href);
         setHomeCookie(area,line5Pos);

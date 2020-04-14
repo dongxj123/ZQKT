@@ -90,6 +90,9 @@ function ReadCardNo() {
     catch (e) { return null; }
 }
 
+
+
+
 //ajax封装
 function $AJAX(request) {
     var req;
@@ -101,29 +104,73 @@ function $AJAX(request) {
         req = new ActiveXObject("Microsoft.XMLHTTP");
     }
     req.onreadystatechange = function () {
-        if (req.readyState == 4) {  //0: 请求未初始化1: 服务器连接已建立2: 请求已接收3: 请求处理中4: 请求已完成，且响应已就绪
+        if (req.readyState == 4) {
             if (req.status == 200)
                 request.success(req);
             else
                 request.failed(req);
         }
     }
+    var data;
     var method = "GET";
     if (request.method != undefined)
         method = request.method;
     var async = true;
     if (request.async != undefined)
         async = request.async;
-    
-    req.open(method, url, async); //与服务端建立连接(请求方式post或get，地址,true表示异步)
-    if(request.method=="POST"){
-        req.setRequestHeader("Content-Type", "application/json;charset=utf-8");
-        req.send(request.param); //发送请求
+    req.open(method, url, async);
+    if(method == "POST"){
+        data = request.data;
+        data = (function(obj){
+            var str = "";
+
+            for(var prop in obj){
+                str += prop + "=" + obj[prop] + "&"
+            }
+            return str;
+        })(data);
+        req.send(data); //
     }else{
-        req.send();
+        req.send(); //
     }
-    
 }
+
+////ajax封装
+//function $AJAX(request) {
+//    var req;
+//    var url = request.url;
+//    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+//        req = new XMLHttpRequest();
+//    }
+//    else {// code for IE6, IE5
+//        req = new ActiveXObject("Microsoft.XMLHTTP");
+//    }
+//    req.onreadystatechange = function () {
+//        if (req.readyState == 4) {  //0: 请求未初始化1: 服务器连接已建立2: 请求已接收3: 请求处理中4: 请求已完成，且响应已就绪
+//            if (req.status == 200)
+//                request.success(req);
+//            else
+//                request.failed(req);
+//        }
+//    }
+//    var method = "GET";
+//    if (request.method != undefined)
+//        method = request.method;
+//    var async = true;
+//    if (request.async != undefined)
+//        async = request.async;
+//    
+//    req.open(method, url, async); //与服务端建立连接(请求方式post或get，地址,true表示异步)
+//    if(request.method=="POST"){
+//        req.setRequestHeader("Content-Type", "application/json;charset=utf-8");
+//        req.send(request.param); //发送请求
+//    }else{
+//        req.send();
+//    }
+//    
+//}
+
+
 //存储cookies
 function SetCookie(name,value)
 {

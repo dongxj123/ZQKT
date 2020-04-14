@@ -47,6 +47,31 @@ function init(){
     ajaxGetlistByRegionCode(parentId);
     ajaxGetOrderStatus(stbId);
 }
+
+
+
+function setDataburn(_categoryId,_stdId) {
+    $AJAX(
+    {
+        url: reqUrl + "api/stbContentController/databurn?stbId=" + _stdId+"&categoryId="+_categoryId,
+        method: "get",
+        async: true,
+        success:
+            function (resp) {
+                eval("var result = " + resp.responseText);
+                //var json = result.data;
+                //initRecommend(json);
+            },
+        failed:
+            function (resp) {
+
+            }
+    });
+}
+
+
+
+
 function ajaxGetOrderStatus(_stdId) {
     $AJAX(
     {
@@ -72,6 +97,7 @@ function ajaxGetOrderStatus(_stdId) {
 }
     function ajaxGetlistByRegionCode(_parentId) {
         setPoint(_parentId,stbId);
+		setDataburn(_parentId,stbId);
         $AJAX(
             {
                 url: reqUrl + "api/stbCategoryController/listByRegionCode?parentId="+_parentId+"&regionCode=zqkt",
@@ -81,7 +107,7 @@ function ajaxGetOrderStatus(_stdId) {
                     function (resp) {
                         eval("var menuJson = " + resp.responseText);
                         var json = menuJson.data;
-                        initRecommend(json);
+                        initRecommend(json);	
                     },
                 failed:
                     function (resp) {

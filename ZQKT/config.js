@@ -1,5 +1,8 @@
 ﻿//stbId="1111";
-stbId=ReadStbidNo();
+//stbId=ReadStbidNo();
+
+stbId = "010002136327B0CCE8AC10831B";
+
 //var reqUrl="http://192.168.24.11:8082/zqkt/";
 var reqUrl="http://21.254.218.116:8080/zqkt/";
 //var reqUrl="http://21.254.220.15:8080/clearway/";

@@ -1,4 +1,4 @@
-*{margin:0;padding:0;}
+﻿*{margin:0;padding:0;}
 #bg{
 	position:absolute;
 	width: 1280px;
@@ -21,7 +21,15 @@
     z-index: 1;
 }
 
-
+#loading{
+	position:absolute;
+	width: 64px;
+	height: 64px;
+    background: url('../image/Preloader_1.gif');
+    left:608px;
+	top:328px;
+	z-index: 10;
+}
 
 #line10{
     position: absolute;
