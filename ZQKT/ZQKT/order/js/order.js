@@ -14,9 +14,39 @@ var checkOrderInterval;
 function init() {
     setPoint("ATUY9C5R",stbId);
     ajaxGetPriceList();
+    ajaxGetPackageList();
     
 }
 
+function ajaxGetPackageList() {
+   $AJAX(
+       {
+           url: reqUrl + "api/upgapi/package/list",
+           method: "get",
+           async: true,
+           success:
+               function (resp) {
+                   eval("var menuJson = " + resp.responseText);
+                   list = menuJson.data;
+                   for(var i=0;i<3;i++){
+                        $("line1"+i).className="line"+area+i;
+                        var str="";
+                        str+='<div class="title">'+list[i].title+'</div>'
+                        str+='<div class="price"><div class="sym">￥</div><div class="sum">'+list[i].price+'<span class="unit">'+list[i].unit+'</span></div></div>'
+                        str+='<div id="oldPrice" class="oldPrice">￥'+list[i].origPrice+'元</div>'
+                        // str+='<img id="QRCode" src="data:image/png;base64,'+QRCodeList[i]+'"/>'
+                        // str+='<div class="tip">使用支付宝扫码支付</div>'
+                        // str+='<div class="Arrearage">账户余额：<span class="arrMoney0">-￥120</span><br/>资费已包含欠费</div>';
+                        $("line1"+i).innerHTML=str;
+                    }
+               },
+           failed:
+               function (resp) {
+                   console.log(resp);
+               }
+       });
+   }
+   
 
 //var menuJson ={"code":200,"msg":"OK","data":{"custInfo":{"output":{"accountmoney":"10","address":"解放街 -- -- 其他 535","areaid":"6001","needmoney":"0","custid":"10070206414","custname":"大众市场测试机"},"status":"0"},"packages":[{"sort":"01","updateDate":"2020-03-06 16:14:07","createDate":"2020-02-11 15:22:49","createName":"管理员","createBy":"admin","title":"1个月","orderNo":"ZQKT20200324103946242","packageId":"800500597467","price":"0.05","updateName":"管理员","updateBy":"admin","imgUrl":"/20200324/1585017586265.png","origPrice":"30","unit":"元","remark":"","duration":"1","id":"957e5af4703316bd017033210d120015"},{"sort":"02","updateDate":"2020-02-28 09:46:58","createDate":"2020-02-11 15:25:02","createName":"管理员","createBy":"admin","title":"3个月","orderNo":"ZQKT20200324103946285","packageId":"800500597548","price":"0.02","updateName":"管理员","updateBy":"admin","imgUrl":"/20200324/1585017586306.png","origPrice":"90","unit":"元","remark":"","duration":"90","id":"957e5af4703316bd0170332313410017"},{"sort":"03","updateDate":"2020-02-28 09:47:03","createDate":"2020-02-11 15:25:59","createName":"管理员","createBy":"admin","title":"12个月","orderNo":"ZQKT20200324103946321","packageId":"800500597549","price":"0.03","updateName":"管理员","updateBy":"admin","imgUrl":"/20200324/1585017586344.png","origPrice":"400","unit":"元","remark":"","duration":"365","id":"957e5af4703316bd01703323f50f001b"}]}};
 

@@ -369,6 +369,14 @@ function grabEvent() {
             break;
         case 340: //back
         case 65:
+        case 81:
+            // if(getCookie("homePageReturnUrl")){
+            //     var returnUrl=getCookie("homePageReturnUrl")
+            //     delCookie("homePageReturnUrl")
+            //     window.location.href=returnUrl
+            // }else{
+            //     window.location.href=location.href.getQueryString("returnUrl");
+            // }
             window.location.href=location.href.getQueryString("returnUrl");
             return 0;
             break;
