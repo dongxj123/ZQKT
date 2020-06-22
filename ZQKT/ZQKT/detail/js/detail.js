@@ -16,6 +16,7 @@ var id;
 var pos;
 var orderStatus=0;//0未订购，1已订购
 function init(){
+    
     // getList(homePageList,1,5);
     id=location.href.getQueryString("catecoryId");
 	page = getCookie("detailPage") ? Number(getCookie("detailPage")) : 1;

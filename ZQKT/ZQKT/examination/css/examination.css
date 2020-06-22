@@ -1,0 +1,151 @@
+﻿*{margin:0;padding:0;}
+#bg{
+	position:absolute;
+	width: 1280px;
+	height: 720px;
+	background: url('../image/bg_img.png');
+}
+#carousel{
+    position:absolute;
+    width: 1280px;
+    height: 302px;
+    top:0px;
+    left: 0px;
+}
+#content{
+    position:absolute;
+    width: 1280px;
+    height: 244px;
+    top:337px;
+    left: 0px;
+}
+#line00{
+    position:absolute;
+    width: 185px;
+    height: 244px;
+    top:0px;
+    left: 29px;
+}
+#line01{
+    position:absolute;
+    width: 185px;
+    height: 244px;
+    top:0px;
+    left: 237px;
+}
+#line02{
+    position:absolute;
+    width: 185px;
+    height: 244px;
+    top:0px;
+    left: 443px;
+}
+#line03{
+    position:absolute;
+    width: 185px;
+    height: 244px;
+    top:0px;
+    left: 651px;
+}
+#line04{
+    position:absolute;
+    width: 185px;
+    height: 244px;
+    top:0px;
+    left: 858px;
+}
+#line05{
+    position:absolute;
+    width: 185px;
+    height: 244px;
+    top:0px;
+    left: 1068px;
+}
+.lineFoc00{
+    position: absolute;
+    width: 204px;
+    height: 263px;
+    top: 327px;
+    left: 18px;
+    background: url('../image/line0Foc.png');
+}
+.lineFoc01{
+    position: absolute;
+    width: 204px;
+    height: 263px;
+    top: 327px;
+    left: 225px;
+    background: url('../image/line0Foc.png');
+}
+.lineFoc02{
+    position: absolute;
+    width: 204px;
+    height: 263px;
+    top: 327px;
+    left: 432px;
+    background: url('../image/line0Foc.png');
+}
+.lineFoc03{
+    position: absolute;
+    width: 204px;
+    height: 263px;
+    top: 327px;
+    left: 640px;
+    background: url('../image/line0Foc.png');
+}
+.lineFoc04{
+    position: absolute;
+    width: 204px;
+    height: 263px;
+    top: 327px;
+    left: 847px;
+    background: url('../image/line0Foc.png');
+}
+.lineFoc05{
+    position: absolute;
+    width: 204px;
+    height: 263px;
+    top: 327px;
+    left: 1057px;
+    background: url('../image/line0Foc.png');
+}
+.lineFoc10{
+    position: absolute;
+    width: 201px;
+    height: 61px;
+    top: 627px;
+    left: 537px;
+    background: url('../image/line1Foc.png');
+}
+.carousel0{
+
+}
+.carousel1{
+    
+}
+.carousel2{
+    
+}
+.carousel3{
+    
+}
+.carousel4{
+    
+}
+.carousel5{
+    
+}
+.carousel6{
+    
+}
+.carousel7{
+    
+}
+#more{
+    position: absolute;
+    width: 201px;
+    height: 61px;
+    top: 627px;
+    left: 537px;
+    background: url('../image/more.png');
+}
