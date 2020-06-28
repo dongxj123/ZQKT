@@ -98,7 +98,7 @@ function focMove(_num){
                 $("line1"+i).className="line1";
             }
             showData(pageListData);
-            $("cover").innerHTML='<img src="'+pageListData[line1Pos].contentImage+'" width="287px" height="360px">';
+            //$("cover").innerHTML='<img src="'+pageListData[line1Pos].contentImage+'" width="287px" height="360px">';
             $("line1"+line1Pos).className="line1Foc";
             $("title" + line1Pos).innerHTML = roll(pageListData[line1Pos].contentTitle,22);
 		}else if(line1Pos + _num >= line1Size){
@@ -214,9 +214,9 @@ function ajaxGetCategoryDetail(_categoryId) {
             success:
                 function (resp) {
                     eval("var menuJson = " + resp.responseText);
-                    var json = menuJson.data[0];
+                    var json = menuJson.data;
                     $("headTitle").innerHTML=json.categoryName;
-                    //$("cover").innerHTML='<img src="'+reqUrl+'img/server/'+json.categoryImg+'" width="287px" height="360px">';
+                    $("cover").innerHTML='<img src="'+json.videoListImg+'" width="287px" height="360px">';
                 },
             failed:
                 function (resp) {

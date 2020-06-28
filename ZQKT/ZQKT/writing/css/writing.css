@@ -1,0 +1,83 @@
+﻿*{margin:0;padding:0;}
+#bg{
+	position:absolute;
+	width: 1280px;
+	height: 720px;
+	background: url('../image/bg_img.png');
+}
+
+#content{
+    position:absolute;
+    width: 1280px;
+    height: 244px;
+    top:337px;
+    left: 0px;
+}
+#line00{
+    position:absolute;
+    width: 274px;
+    height: 277px;
+    top:42px;
+    left: 233px;
+    background: url('../image/7.png');
+}
+#line01{
+    position:absolute;
+    width: 274px;
+    height: 277px;
+    top:42px;
+    left: 568px;
+    background: url('../image/8.png');
+}
+#line02{
+    position:absolute;
+    width: 274px;
+    height: 277px;
+    top:42px;
+    left: 928px;
+    background: url('../image/9.png');
+}
+
+.lineFoc00{
+    position:absolute;
+    width: 285px;
+    height: 286px;
+    top: 36px;
+    left: 227px;
+    background: url('../image/foc7.png');
+}
+.lineFoc01{
+    position:absolute;
+    width: 285px;
+    height: 286px;
+    top: 36px;
+    left: 561px;
+    background: url('../image/foc8.png');
+}
+.lineFoc02{
+    position:absolute;
+    width: 285px;
+    height: 286px;
+    top: 36px;
+    left: 922px;
+    background: url('../image/foc9.png');
+}
+
+
+.lineFoc10{
+    position: absolute;
+    width: 201px;
+    height: 61px;
+    top: 532px;
+    left: 629px;
+    background: url('../image/line1Foc.png');
+}
+
+#more{
+    position: absolute;
+    width: 201px;
+    height: 61px;
+    top: 532px;
+    left: 629px;
+    background: url('../image/more.png');
+}
