@@ -120,7 +120,7 @@ function initRecommend(_json){
     list=_json;
     pageListData=list.slice(9);
     line6Size=pageListData.length;
-    for(var i=0;i<list.length;i++){
+    setTimeout(function(){
         $("line30").innerHTML='<img src="'+reqUrl+'img/server/'+list[0].categoryImg+'" width="589px" height="337px">';
         $("line50").innerHTML='<img src="'+reqUrl+'img/server/'+list[1].categoryImg+'" width="292px" height="166px">';
         $("line51").innerHTML='<img src="'+reqUrl+'img/server/'+list[2].categoryImg+'" width="292px" height="166px">';
@@ -130,13 +130,14 @@ function initRecommend(_json){
         $("line53").innerHTML='<img src="'+reqUrl+'img/server/'+list[4].categoryImg+'" width="292px" height="166px">';
         $("line54").innerHTML='<img src="'+reqUrl+'img/server/'+list[7].categoryImg+'" width="292px" height="166px">';
         $("line55").innerHTML='<img src="'+reqUrl+'img/server/'+list[8].categoryImg+'" width="292px" height="166px">';
-    }
-    for(var i=0;i<line6Size;i++){
-        var rowIndex=parseInt(i/4);
-        var topVal=700+rowIndex*182+24*parseInt(rowIndex/2);
-        $("inner").innerHTML+='<div id="line6'+i+'" class="line6" style="left:'+leftArr[i%4]+';top:'+topVal+'px;"><img src="'+reqUrl+'img/server/'+pageListData[i].categoryImg+'" width="292px" height="166px"></div>';
-    }
-    focMove(0);
+        for(var i=0;i<line6Size;i++){
+            var rowIndex=parseInt(i/4);
+            var topVal=700+rowIndex*182+24*parseInt(rowIndex/2);
+            $("inner").innerHTML+='<div id="line6'+i+'" class="line6" style="left:'+leftArr[i%4]+';top:'+topVal+'px;"><img src="'+reqUrl+'img/server/'+pageListData[i].categoryImg+'" width="292px" height="166px"></div>';
+        }
+        focMove(0);
+    }, 100);
+    
 }
 function getStyle(element, property){
     var proValue = null;
