@@ -1,5 +1,5 @@
 ﻿var area=1;
-var areaSize=1;//0推荐，1导航栏，2订阅，3视频，45推荐位
+var areaSize=2;
 // var line0Size=1;
 // var line0Pos=0;
 var line1Size=4;
@@ -44,13 +44,29 @@ function ajaxGetOrderStatus(_stdId) {
             function (resp) {
                 eval("var Json = " + resp.responseText);
                 //Json.code=200;
-                orderStatus=Json.code==200?1:0;
+                switch (Json.code) {
+                    case 200:
+                        orderStatus=1;//已订购
+                        break;
+                    case 412:
+                        orderStatus=0;//未订购
+                        break;
+                    case 999:
+                        orderStatus=999;//网厅接口出错
+                        $("errorbg").style.display="block";
+                        area=999;
+                        break;
+                }
                 ajaxGetContentlist(id);
                 ajaxGetCategoryDetail(id);
             },
         failed:
             function (resp) {
-
+                // orderStatus=999;//网厅接口出错
+                // $("errorbg").style.display="block";
+                // area=999;
+                // ajaxGetContentlist(id);
+                // ajaxGetCategoryDetail(id);
             }
     });
 }
@@ -131,6 +147,9 @@ function doselect(){
             setDetailCookie(page,line1Pos);
             ajaxGetContentDetail(pageListData[line1Pos].id);
             //window.location.href = "../vod/vodPlay.htm?rtspUrl=" +pageListData[line1Pos];
+        }else if(orderStatus==999){
+            $("errorbg").style.display="block";
+            area=999;
         }else{
             //未订购，去订购页面
             SetCookie("orderReturnUrl", location.href);
@@ -138,6 +157,10 @@ function doselect(){
             window.location.href = "../order/order.html";
         }
        
+    } else if (area == 999) {
+        $("errorbg").style.display="none";
+        area=1;
+        focMove(0);
     } 
 }
 function ajaxGetContentDetail(_contentId) {
@@ -197,7 +220,7 @@ function ajaxGetContentlist(_categoryId) {
                     totalPage=Math.ceil(json.total/4);
                     $("progressBar").style.height = (page / totalPage).toFixed(3) * 100 + "%";
                     showData(pageListData);
-                    focMove(0);
+                    if(area!=999) focMove(0);
                 },
             failed:
                 function (resp) {
@@ -216,7 +239,9 @@ function ajaxGetCategoryDetail(_categoryId) {
                     eval("var menuJson = " + resp.responseText);
                     var json = menuJson.data;
                     $("headTitle").innerHTML=json.categoryName;
-                    $("cover").innerHTML='<img src="'+json.videoListImg+'" width="287px" height="360px">';
+                    setTimeout(function() {
+                        $("cover").innerHTML='<img src="'+json.videoListImg+'" width="287px" height="360px">';
+                    }, 100);
                 },
             failed:
                 function (resp) {
@@ -255,20 +280,26 @@ function grabEvent() {
             break;
         case 3: //left
         case 37:
-            if(page>1){
-                page--;
-                ajaxGetContentlist(id);
+            if(area==1){
+                if(page>1){
+                    page--;
+                    ajaxGetContentlist(id);
+                }
             }
+            
             return 0;
             break;
         case 4: //right
         case 39:
-        	if(page<totalPage){
-                page++;
-                line1Pos=0;
-                ajaxGetContentlist(id);
-                
+            if(area==1){
+                if(page<totalPage){
+                    page++;
+                    line1Pos=0;
+                    ajaxGetContentlist(id);
+                    
+                }
             }
+        	
             return 0;
             break;
         case 13: //enter

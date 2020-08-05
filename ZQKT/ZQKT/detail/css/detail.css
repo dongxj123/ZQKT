@@ -5,6 +5,14 @@
 	height: 720px;
 	background: url('../image/bg_img_01_3.jpg');
 }
+#errorbg{
+	position:absolute;
+	width: 1280px;
+	height: 720px;
+    background: url('../image/error.png');
+    z-index: 1;
+}
+
 .headTitle {
     position: absolute;
     width: 521px;
