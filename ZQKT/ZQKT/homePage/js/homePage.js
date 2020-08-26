@@ -155,7 +155,8 @@ function initRecommend(_json){
         //小窗口视频播放
         movies = [posiList[0].description];
         indexmovies = movies[0];
-        initMedia(49, 152, 587, 335);
+        //
+        initMedia(49, 152, 587, 336);
     }else{
          //推荐页1
          $("line30").innerHTML='<img id="pic0" src="'+reqUrl+'img/server/'+posiList[0].recommenPositionImg+'" width="589px" height="337px">';

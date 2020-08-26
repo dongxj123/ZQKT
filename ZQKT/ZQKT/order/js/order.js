@@ -26,8 +26,8 @@ function ajaxGetPackageList() {
            async: true,
            success:
                function (resp) {
-                   eval("var menuJson = " + resp.responseText);
-                   list = menuJson.data;
+                   eval("var menuJson1 = " + resp.responseText);
+                   list = menuJson1.data;
                    for(var i=0;i<3;i++){
                         $("line1"+i).className="line"+area+i;
                         var str="";
