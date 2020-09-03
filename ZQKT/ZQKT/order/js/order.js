@@ -176,7 +176,7 @@ function focMove(_num) {
             //focStr+='<img id="QRCode" src="data:image/png;base64,'+QRCodeList[line1Pos]+'"/>'
             focStr += '<img id="QRCode" src="' +reqUrl+ "img/server/qrcode"+list.packages[line1Pos].imgUrl + '"/>'
             focStr+='<div class="tip">使用支付宝扫码支付</div>'
-			needmoney=list.custInfo.output.needmoney;
+			needmoney=list.custInfo.output.needmoney/100;
             if(needmoney>0){
                 focStr+='<div class="Arrearage">账户余额：<span class="arrMoney'+line1Pos+'">-￥'+needmoney+'</span><br/>资费已包含欠费</div>';
             }
