@@ -4,7 +4,7 @@ stbId=ReadStbidNo();
 //stbId = "010002136327B0CCE8AC10831B";
 
 //var reqUrl="http://192.168.24.11:8082/zqkt/";
-var reqUrl="http://21.254.218.116:8080/zqkt/";
+var reqUrl="http://21.254.52.103:8080/zqkt/";
 //var reqUrl="http://21.254.220.15:8080/clearway/";
 // var localurl = "http://21.254.180.145:8080/ZSZCProject/"
 // //获取列表

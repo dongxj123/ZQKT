@@ -54,7 +54,7 @@ function SetCookie(key,value) {
 function setPoint(_id,_stbid) {
     $AJAX(
         {
-            url: "http://21.254.218.116:8080/zqkt/api/stbapi/buriedPointPvUv?stbid="+_stbid+"&code="+_id,
+            url: "http://21.254.52.103:8080/zqkt/api/stbapi/buriedPointPvUv?stbid="+_stbid+"&code="+_id,
             method: "get",             
             async: true,               
             success:                   
