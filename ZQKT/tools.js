@@ -78,7 +78,7 @@ function ReadStbidNo() {
         //var stbid= wasuWeb.getStbId();//TVOS
         return stbid;
     }
-    catch (e) { return "010002136327B0CCE8AC10831B"; }
+    catch (e) { return "010004017221900024C1502D7F"; }
 }
 
 //读取智能卡号
