@@ -12,7 +12,13 @@
     background: url('../image/error.png');
     z-index: 1;
 }
-
+#largebg{
+	position:absolute;
+	width: 1280px;
+	height: 720px;
+    background: url('../image/large.png');
+    z-index: 1;
+}
 .headTitle {
     position: absolute;
     width: 521px;

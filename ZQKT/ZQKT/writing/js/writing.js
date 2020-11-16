@@ -18,6 +18,11 @@ var lunboSize=8;
 function init() {
     focMove(0);
     attachEvent()
+    if(getCookie("writingReturnUrl")){
+        
+    }else{
+	    SetCookie("writingReturnUrl",document.referrer);
+    }
     //showCourse(pageNum);
     // myInterval=setInterval(function(){
     //     if(lunboIndex < (lunboSize-1)){
@@ -111,7 +116,7 @@ function grabEvent() {
         case 45:
         case 81:
             //alert(location.href.getQueryString("returnUrl"))
-            window.location.href=location.href.getQueryString("returnUrl");
+            window.location.href=getCookie("writingReturnUrl");
             return 0;
             break;
         

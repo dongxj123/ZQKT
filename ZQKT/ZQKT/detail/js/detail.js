@@ -14,7 +14,7 @@ var pageSize=4;
 var totalPage;
 var id;
 var pos;
-var orderStatus=0;//0未订购，1已订购
+var orderStatus=998;//0未订购，1已订购,998初始值未获取
 function init(){
     
     // getList(homePageList,1,5);
@@ -31,7 +31,8 @@ function init(){
     setTimeout(function(){
         attachEvent();
     },300);
-    
+    ajaxGetContentlist(id);
+    ajaxGetCategoryDetail(id);
     ajaxGetOrderStatus(stbId);
 }
 function ajaxGetOrderStatus(_stdId) {
@@ -57,8 +58,7 @@ function ajaxGetOrderStatus(_stdId) {
                         area=999;
                         break;
                 }
-                ajaxGetContentlist(id);
-                ajaxGetCategoryDetail(id);
+                
             },
         failed:
             function (resp) {
@@ -150,6 +150,10 @@ function doselect(){
         }else if(orderStatus==999){
             $("errorbg").style.display="block";
             area=999;
+        }else if(orderStatus==998){
+            //订购状态未获取
+            $("largebg").style.display="block";
+            area=998;
         }else{
             //未订购，去订购页面
             SetCookie("orderReturnUrl", location.href);
@@ -159,6 +163,10 @@ function doselect(){
        
     } else if (area == 999) {
         $("errorbg").style.display="none";
+        area=1;
+        focMove(0);
+    }  else if (area == 998) {
+        $("largebg").style.display="none";
         area=1;
         focMove(0);
     } 

@@ -37,7 +37,11 @@ function init(){
     delCookie("homeArea");
     delCookie("homePos");
     eval("line"+area+"Pos="+pos);
-	
+    if(getCookie("homePageReturnUrl")){
+        
+    }else{
+	    SetCookie("homePageReturnUrl",document.referrer);
+    }
 	//$("lineFoc").className="lineFoc13";
     //startVideo(0);
     focMove(0);
@@ -378,7 +382,7 @@ function grabEvent() {
             // }else{
             //     window.location.href=location.href.getQueryString("returnUrl");
             // }
-            window.location.href=location.href.getQueryString("returnUrl");
+            window.location.href=getCookie("homePageReturnUrl");
             return 0;
             break;
         case 5210:
